@@ -1,0 +1,17 @@
+#!/bin/bash
+# insta485install
+# Stop on errors
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+set -x
+
+python3 -m venv env
+source env/bin/activate
+
+mkdir -p tmp
+export TMPDIR=tmp
+
+pip install madoop
+pip install -r requirements.txt
+pip install -e index
+pip install -e search
