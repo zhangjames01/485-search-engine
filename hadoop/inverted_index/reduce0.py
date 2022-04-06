@@ -7,13 +7,11 @@ import itertools
 
 def reduce_one_group(key, group):
     """Reduce one group."""
-    docs = []
+    count = 0
     for line in group:
         value = line.partition("\t")[2]
-        if value not in docs:
-            docs.append(value)
-        
-    len(docs)
+        count += value
+    
 
 
 def keyfunc(line):
@@ -23,10 +21,11 @@ def keyfunc(line):
 
 def main():
     """Divide sorted lines into groups that share a key."""
-    with open()
+    count = 0
     for key, group in itertools.groupby(sys.stdin, keyfunc):
         reduce_one_group(key, group)
-
+        count += 1
+    print(count)
 
 if __name__ == "__main__":
     main()
