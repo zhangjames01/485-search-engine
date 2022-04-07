@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import re
 import sys
 
@@ -8,7 +9,7 @@ def main():
     allDocs = []
     stopWords = []
     allWords = {}
-    with open("/hadoop/inverted_index/stopwords.txt") as stopWordsFile:
+    with open("stopwords.txt") as stopWordsFile:
         stopWords = stopWordsFile.readlines()
     for line in sys.stdin:
         # get doc id, text, title, and clean up, remove stop words
@@ -44,7 +45,7 @@ def main():
 
 def outputDict(dict):
     for key, value in dict.items():
-        print(key, "\t",value)
+        print(f"{key}\t{value}")
 
 if __name__ == "__main__":
     main()

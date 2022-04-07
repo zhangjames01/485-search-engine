@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import re
 import sys
 
@@ -13,7 +14,7 @@ def main():
         
 def outputDict(dict):
     for key, value in dict.items():
-        print(key, "\t",value)
+        print(f"key\t{value}")
 
 if __name__ == "__main__":
     main()

@@ -51,5 +51,13 @@ madoop \
   -mapper ./map2.py \
   -reducer ./reduce2.py
 
+  # Job 3
+madoop \
+  -input output2 \
+  -output output3 \
+  -mapper ./map3.py \
+  -reducer ./reduce3.py
+
+
 # REMINDER: don't forget to set -numReduceTasks in your last stage.  You'll
 # need this to generate the correct number of inverted index segments.
