@@ -13,16 +13,17 @@ def reduce_one_group(key, group, totalDocs):
         if not value in foundDocs:
             foundDocs[value] = 1
         else:
-            foundDocs[value] += 1 
-    #foundDocs.sort()
+            foundDocs[value] += 1
+    # foundDocs.sort()
     numDocs = len(foundDocs)
-    inverseFreq = math.log(numDocs/totalDocs, 10)
+    inverseFreq = math.log(float(totalDocs)/float(numDocs), 10)
     word = str(key)
     for doc in foundDocs:
         docId = doc
         freq = foundDocs[doc]
         print(f"{word}\t{inverseFreq}\t{docId}\t{freq}")
-#TODO: pass ^^ to job2, where we will group by docID and then find normalization factor for each doc
+# TODO: pass ^^ to job2, where we will group by docID and then find normalization factor for each doc
+
 
 def keyfunc(line):
     """Return the key from a TAB-delimited key-value pair."""

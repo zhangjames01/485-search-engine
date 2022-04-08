@@ -13,7 +13,10 @@ def reduce_one_group(key, group):
         if count == 0:
             count += 1
             print(f"{word}\t{inversefreq}", end = "\t")
-        print(f"{docId}\t{freq}\t{norm}", end = "\t")
+        else:
+            print("\t")
+        print(f"{docId}\t{freq}\t{norm}", end = "")
+        
 
 def keyfunc(line):
     """Return the key from a TAB-delimited key-value pair."""

@@ -26,6 +26,7 @@ set -x
 
 # Remove output directories
 rm -rf output output[0-9]
+rm -rf ../../index/index/inverted_index
 
 # Job 0: Document Count (this job is not part of the pipeline)
 madoop \
@@ -47,17 +48,51 @@ madoop \
 # Job 2
 madoop \
   -input output1 \
-  -output output2 \
+  -output ../../index/index/inverted_index \
   -mapper ./map2.py \
-  -reducer ./reduce2.py
+  -reducer ./reduce2.py \
+  -numReduceTasks 3
 
   # Job 3
-madoop \
-  -input output2 \
-  -output output3 \
-  -mapper ./map3.py \
-  -reducer ./reduce3.py
+# madoop \
+#   -input output2 \
+#   -output output3 \
+#   -mapper ./map3.py \
+#   -reducer ./reduce3.py
 
 
+# Take the original filename
+original = "../../index/index/inverted_index/part-00000"
+# Take the renamed filename
+rename = "../../index/index/inverted_index/inverted_index_0.txt"
+
+# Check the original file exists or not
+if [ -f $original ]; then
+     # Rename the file
+     $(mv $original $rename)
+     echo "The file is renamed."
+fi
+# Take the original filename
+original = "../../index/index/inverted_index/part-00001"
+# Take the renamed filename
+rename = "../../index/index/inverted_index/inverted_index_1.txt"
+
+# Check the original file exists or not
+if [ -f $original ]; then
+     # Rename the file
+     $(mv $original $rename)
+     echo "The file is renamed."
+fi
+# Take the original filename
+original = "../../index/index/inverted_index/part-00002"
+# Take the renamed filename
+rename = "../../index/index/inverted_index/inverted_index_2.txt"
+
+# Check the original file exists or not
+if [ -f $original ]; then
+     # Rename the file
+     $(mv $original $rename)
+     echo "The file is renamed."
+fi
 # REMINDER: don't forget to set -numReduceTasks in your last stage.  You'll
 # need this to generate the correct number of inverted index segments.
