@@ -12,7 +12,7 @@ def main():
     """Map stage."""
     for line in sys.stdin:
         LOGGER.info(line)
-        word, inverseFreq, docId, freq = line.split('\t')
+        word, inverseFreq, docId, freq = line.strip().split('\t')
         print(f"{docId}\t{word}\t{inverseFreq}\t{freq}")
 
 if __name__ == "__main__":

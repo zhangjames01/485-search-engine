@@ -9,7 +9,7 @@ def reduce_one_group(key, group, totalDocs):
     """Reduce one group."""
     foundDocs = {}
     for line in group:
-        value = line.split("\t")[1]
+        value = line.strip().split("\t")[1]
         if not value in foundDocs:
             foundDocs[value] = 1
         else:
@@ -21,7 +21,7 @@ def reduce_one_group(key, group, totalDocs):
     for doc in foundDocs:
         docId = doc
         freq = foundDocs[doc]
-        print(str(f"{word}\t{inverseFreq}\t{docId}\t{freq}"))
+        print(f"{word}\t{inverseFreq}\t{docId}\t{freq}")
 #TODO: pass ^^ to job2, where we will group by docID and then find normalization factor for each doc
 
 def keyfunc(line):
