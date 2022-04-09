@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import re
 import sys
+import csv
 
 from pyparsing import identchars
 
@@ -13,14 +14,16 @@ def main():
     allDocs = []
     stopWords = []
     allWords = []
+    csv.field_size_limit(sys.maxsize)
     with open("stopwords.txt") as stopWordsFile:
         for line in stopWordsFile:
             stopWords.append(line.strip())
-    for line in sys.stdin:
+    for row in csv.reader(sys.stdin):
         # get doc id, text, title, and clean up, remove stop words
-        id, comma, fullDoc = line.strip().partition(",")
-        id = id.replace('"', '')
-        #fullDoc = title + " " + text
+        # id, title, text = line.strip().split('","')
+        # id = id.replace('"', '')
+        id, title, text = row
+        fullDoc = title + " " + text
         fullDoc = re.sub(r"[^a-zA-Z0-9 ]+", "", fullDoc)
         fullDoc = fullDoc.casefold()
         allDocs.append(fullDoc)

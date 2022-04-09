@@ -62,36 +62,36 @@ madoop \
 
 
 # Take the original filename
-original = "../../index/index/inverted_index/part-00000"
+ORIGINAL="../../index/index/inverted_index/part-00000"
 # Take the renamed filename
-rename = "../../index/index/inverted_index/inverted_index_0.txt"
+RENAME="../../index/index/inverted_index/inverted_index_0.txt"
 
 # Check the original file exists or not
-if [ -f $original ]; then
+if [ -f $ORIGINAL ]; then
      # Rename the file
-     $(mv $original $rename)
+     $(mv $ORIGINAL $RENAME)
      echo "The file is renamed."
 fi
 # Take the original filename
-original = "../../index/index/inverted_index/part-00001"
+ORIGINAL="../../index/index/inverted_index/part-00001"
 # Take the renamed filename
-rename = "../../index/index/inverted_index/inverted_index_1.txt"
+RENAME="../../index/index/inverted_index/inverted_index_1.txt"
 
 # Check the original file exists or not
-if [ -f $original ]; then
+if [ -f $ORIGINAL ]; then
      # Rename the file
-     $(mv $original $rename)
+     $(mv $ORIGINAL $RENAME)
      echo "The file is renamed."
 fi
 # Take the original filename
-original = "../../index/index/inverted_index/part-00002"
+ORIGINAL="../../index/index/inverted_index/part-00002"
 # Take the renamed filename
-rename = "../../index/index/inverted_index/inverted_index_2.txt"
+RENAME="../../index/index/inverted_index/inverted_index_2.txt"
 
 # Check the original file exists or not
-if [ -f $original ]; then
+if [ -f $ORIGINAL ]; then
      # Rename the file
-     $(mv $original $rename)
+     $(mv $ORIGINAL $RENAME)
      echo "The file is renamed."
 fi
 # REMINDER: don't forget to set -numReduceTasks in your last stage.  You'll
