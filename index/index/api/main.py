@@ -39,7 +39,8 @@ def read_inverted_index(index_dir):
     with open(index_dir/"inverted_index"/index.app.config["INDEX_PATH"]) as invIndexFile:
         for line in invIndexFile:
             key = line.partition(" ")[0]
-            invLines[key] = {}
+            if not key in invLines:
+                invLines[key] = {}
             invLines[key]["idf"] = line.split()[1]
             size = (len(line.split()) - 2)//3
             for i in range(size):
@@ -66,12 +67,16 @@ def show_hits():
 
     docList = []
     for word in allWords:
-        keys = list(invLines[word].keys())
-        keys.pop(0)
-        docList.append(set(keys))
+        if word in invLines:
+            keys = list(invLines[word].keys())
+            keys.pop(0)
+            docList.append(set(keys))
+        else:
+            context = {"hits": []}
+            return flask.jsonify(**context)
     finalDocs = list(docList[0].intersection(*docList))
     hits = []
-    finalDocs.sort()
+    #finalDocs.sort()
     for doc in finalDocs:
         q = []
         for word in allWords:
@@ -81,13 +86,15 @@ def show_hits():
             d.append(float(invLines[word][doc][0]) * float(invLines[word]["idf"]))
         # dot = q*d
         dot = sum(i[0] * i[1] for i in zip(q, d))
+        summy = 0
         for num in q:
-            num *= num
-        norm_q = math.sqrt(sum(q))
+            summy += math.pow(num, 2)
+        norm_q = math.sqrt(summy)
         norm_d = math.sqrt(float(invLines[word][doc][1]))
         tfidf = dot/(norm_q * norm_d)
         score = (weight * float(pageRank[doc])) + ((1-weight) * tfidf)
-        hits.append({"docid": doc,
+        hits.append({"docid": int(doc),
                      "score": score})
-    context = {"hits": hits}
+        
+    context = {"hits": sorted(hits, key = lambda x: x["score"], reverse=True)}
     return flask.jsonify(**context)
