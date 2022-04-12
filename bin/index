@@ -6,7 +6,7 @@ set -Eeuo pipefail
 set -x
 
 usage() {
-  echo "Usage: $0 (create|destroy|reset|dump)"
+  echo "Usage: $0 (start|stop|restart|status)"
 }
 if [ $# -ne 1 ]; then
   usage

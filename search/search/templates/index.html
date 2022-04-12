@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    ...
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <div class="feed">
+        <div class="search_bar">
+            <form action="/" method="GET">
+                <div><input type="text" name="q" value="query" /></div>
+                <div><input type="range" name="w" min="0" max="1" step=".01" /></div>
+                <input type="submit" value="Search" />
+            </form>
+        </div>
+        <div class="ask485">
+            ask485
+        </div>
+        <div class="pagerank_weight">Pagerank Weight</div>
+        <div class="docs">
+            {%if docs|length > 0%}
+            {%for doc in docs%}
+            {%if doc.url%}
+            <a class="doc_url">{{doc.url}}</a>
+            {%else%}
+            No url available
+            {%endif%}
+            <a class="doc_url">{{doc.title}}</a>
+            {%if doc.summary%}
+            <div class="doc_summary">{{doc.summary}}</div>
+            {%else%}
+            No summary available
+            {%endif%}
+            {%endfor%}
+            {%else%}
+            <div class="no_results">No search results found!</div>
+            {%endif%}
+        </div>
+    </div>
+</head>
+
+</html>
