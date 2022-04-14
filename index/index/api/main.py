@@ -38,6 +38,7 @@ def read_pagerank(index_dir):
 def read_inverted_index(index_dir):
     with open(index_dir/"inverted_index"/index.app.config["INDEX_PATH"]) as invIndexFile:
         for line in invIndexFile:
+            print("running")
             key = line.partition(" ")[0]
             if not key in invLines:
                 invLines[key] = {}
@@ -76,14 +77,15 @@ def show_hits():
             return flask.jsonify(**context)
     finalDocs = list(docList[0].intersection(*docList))
     hits = []
-    #finalDocs.sort()
+    # finalDocs.sort()
     for doc in finalDocs:
         q = []
         for word in allWords:
             q.append(float(allWords[word]) * float(invLines[word]["idf"]))
         d = []
         for word in allWords:
-            d.append(float(invLines[word][doc][0]) * float(invLines[word]["idf"]))
+            d.append(float(invLines[word][doc][0])
+                     * float(invLines[word]["idf"]))
         # dot = q*d
         dot = sum(i[0] * i[1] for i in zip(q, d))
         summy = 0
@@ -95,6 +97,6 @@ def show_hits():
         score = (weight * float(pageRank[doc])) + ((1-weight) * tfidf)
         hits.append({"docid": int(doc),
                      "score": score})
-        
-    context = {"hits": sorted(hits, key = lambda x: x["score"], reverse=True)}
+
+    context = {"hits": sorted(hits, key=lambda x: x["score"], reverse=True)}
     return flask.jsonify(**context)
