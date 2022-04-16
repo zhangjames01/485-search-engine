@@ -28,13 +28,15 @@ def show_GUI():
                     # use request library to get url + query
                     # target=make_query, args=requests.get(url, params={"q": query, "w": weight}))
                     target=make_query, args=(str(url) + "?q=" + str(query) + "&w=" + str(weight),))
+                thread.start()
+                threads.append(thread)
             else:
                 thread = threading.Thread(
                     # use request library to get url + query
                     # target=make_query, args=requests.get(url, params={"q": query, "w": weight}))
                     target=make_query, args=(str(url) + "?q=" + str(queryList[0]) + "+" + str(queryList[1]) + "&w=" + str(weight),))
-            thread.start()
-            threads.append(thread)
+                thread.start()
+                threads.append(thread)
         for thread in threads:
             thread.join()
         docList = heapq.merge(*allHits, key=lambda x: x["score"], reverse=True)
