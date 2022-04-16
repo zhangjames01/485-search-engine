@@ -1,3 +1,4 @@
+"""Insta485 REST API."""
 import index
 import flask
 import os
@@ -23,12 +24,14 @@ def startup():
 
 
 def read_stopwords(index_dir):
+    """Insta485 REST API."""
     with open(index_dir/"stopwords.txt") as stopWordsFile:
         for line in stopWordsFile:
             stopWords.append(line.strip())
 
 
 def read_pagerank(index_dir):
+    """Insta485 REST API."""
     with open(index_dir/"pagerank.out") as rankFile:
         for line in rankFile:
             id, value = line.split(",")
@@ -36,6 +39,7 @@ def read_pagerank(index_dir):
 
 
 def read_inverted_index(index_dir):
+    """Insta485 REST API."""
     with open(index_dir/"inverted_index"/index.app.config["INDEX_PATH"]) as invIndexFile:
         for line in invIndexFile:
             #print("running")
@@ -51,7 +55,7 @@ def read_inverted_index(index_dir):
 
 @index.app.route('/api/v1/hits/')
 def show_hits():
-    """Show hits page"""
+    """Show hits page."""
     query = flask.request.args.get('q', default="", type=str)
     weight = flask.request.args.get('w', default=0.5, type=float)
     queryWords = list(query.split())

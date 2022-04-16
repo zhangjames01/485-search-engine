@@ -2,6 +2,11 @@
 <html lang="en">
 
 <head>
+    <title>
+        Search Page
+    </title>
+</head>
+<body>
     ...
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -10,7 +15,11 @@
         <div class="search_bar">
             <form action="/" method="GET">
                 <div><input type="text" name="q" value="{{query}}" /></div>
-                <div><input type="range" name="w" min="0" max="1" step=".01" /></div>
+                {%if weight%}
+                <div><input type="range" name="w" min="0" max="1" step=".01" value="{{weight}}" /></div>
+                {%else%}
+                <div><input type="range" name="w" min="0" max="1" step=".01" value="0.5" /></div>
+                {%endif%}
                 <input type="submit" value="Search" />
             </form>
         </div>
@@ -22,15 +31,16 @@
             {%if docs|length > 0%}
             {%for doc in docs%}
             {%if doc.url%}
-            <a class="doc_url">{{doc.url}}</a>
+            <a class="doc_url" href={{doc.url}}>{{doc.url}}</a>
             {%else%}
-            No url available
+            <a class="doc_url" href="/">No url available</a>
             {%endif%}
-            <a class="doc_url">{{doc.title}}</a>
+            <br>
+            <div class="doc_title"> <a href={{doc.url}}>{{doc.title}}</a></div>
             {%if doc.summary%}
             <div class="doc_summary">{{doc.summary}}</div>
             {%else%}
-            No summary available
+            <div class="doc_summary">No summary available</div>
             {%endif%}
             {%endfor%}
             {%else%}
@@ -38,6 +48,5 @@
             {%endif%}
         </div>
     </div>
-</head>
-
+   </body>
 </html>

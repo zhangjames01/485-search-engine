@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Word count reducer."""
+
 import sys
 import itertools
 import logging

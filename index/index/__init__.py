@@ -1,3 +1,4 @@
+"""Insta485 REST API."""
 import flask
 
 

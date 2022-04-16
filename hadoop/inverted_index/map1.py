@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
+"""Map 1."""
+
 import re
 import sys
 import csv
 
 from pyparsing import identchars
 
-"""Map 1."""
 # this will open the file
 
 
@@ -37,6 +38,7 @@ def main():
 
 
 def outputDict(dict):
+    """Output the sorted dict."""
     for item in sorted(dict):
         print(f"{item[0]}\t{item[1]}")
 

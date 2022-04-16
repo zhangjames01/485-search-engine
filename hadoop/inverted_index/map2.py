@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
+"""Map 2."""
+
 import re
 import sys
 
-"""Map 2."""
 # this will open the file
 
 

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
+"""Map 0."""
+
 import re
 import sys
 
-"""Map 0."""
 # this will open the file
 def main():
     """Return the number of documents."""
@@ -13,6 +14,7 @@ def main():
     outputDict(dict)
         
 def outputDict(dict):
+    """Output the dict."""
     for key, value in dict.items():
         print(f"key\t{value}")
 
