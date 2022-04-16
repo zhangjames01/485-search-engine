@@ -24,9 +24,9 @@ case $1 in
     ;;
   "stop")
     echo "stopping index server ..."
+    pkill -f "flask run --host 0.0.0.0 --port 9000" || true
     pkill -f "flask run --host 0.0.0.0 --port 9001" || true
     pkill -f "flask run --host 0.0.0.0 --port 9002" || true
-    pkill -f "flask run --host 0.0.0.0 --port 9003" || true
     ;;
   "restart")
    ./bin/index stop

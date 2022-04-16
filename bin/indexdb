@@ -26,8 +26,11 @@ case $1 in
     rm -rf var/index.sqlite3
     ;;
   "reset")
-    ./bin/indexdb destroy
-    ./bin/indexdb create
+    #./bin/indexdb destroy
+    #./bin/indexdb create
+    rm -f var/index.sqlite3
+    mkdir -p var/
+    sqlite3 var/index.sqlite3 < search/search/sql/index.sql
     ;;
   *)
     usage

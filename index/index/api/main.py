@@ -38,7 +38,7 @@ def read_pagerank(index_dir):
 def read_inverted_index(index_dir):
     with open(index_dir/"inverted_index"/index.app.config["INDEX_PATH"]) as invIndexFile:
         for line in invIndexFile:
-            print("running")
+            #print("running")
             key = line.partition(" ")[0]
             if not key in invLines:
                 invLines[key] = {}
